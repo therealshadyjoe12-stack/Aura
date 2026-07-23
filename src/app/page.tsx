@@ -11,9 +11,6 @@ import {
   X,
   ChevronRight,
   Play,
-  Pause,
-  Volume2,
-  Maximize,
   ArrowUp,
 } from 'lucide-react';
 
@@ -72,198 +69,71 @@ function FeatureCard({
   );
 }
 
-/* ──────────────────── Video Player with Controls ──────────────────── */
+/* ──────────────────── YouTube Video Player ──────────────────── */
 function VideoPlayer() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
-  const [isMuted, setIsMuted] = useState(false);
-  const [showControls, setShowControls] = useState(true);
+  const [showPoster, setShowPoster] = useState(true);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  // YouTube video ID — change this to any YouTube video you want
+  // Current: "Big Buck Bunny" (open-source, freely available, very stable)
+  const YOUTUBE_VIDEO_ID = 'YE7VzlLtp-4';
 
-    const onTimeUpdate = () => setCurrentTime(video.currentTime);
-    const onLoadedMetadata = () => setDuration(video.duration);
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
-
-    video.addEventListener('timeupdate', onTimeUpdate);
-    video.addEventListener('loadedmetadata', onLoadedMetadata);
-    video.addEventListener('play', onPlay);
-    video.addEventListener('pause', onPause);
-    
-    return () => {
-      video.removeEventListener('timeupdate', onTimeUpdate);
-      video.removeEventListener('loadedmetadata', onLoadedMetadata);
-      video.removeEventListener('play', onPlay);
-      video.removeEventListener('pause', onPause);
-    };
-  }, []);
-
-  const togglePlay = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
-  };
-
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = !video.muted;
-    setIsMuted(video.muted);
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const video = videoRef.current;
-    if (!video) return;
-    const vol = parseFloat(e.target.value);
-    video.volume = vol;
-    setVolume(vol);
-    if (vol === 0) {
-      setIsMuted(true);
-      video.muted = true;
-    } else if (isMuted) {
-      setIsMuted(false);
-      video.muted = false;
-    }
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const video = videoRef.current;
-    if (!video) return;
-    const time = parseFloat(e.target.value);
-    video.currentTime = time;
-    setCurrentTime(time);
-  };
-
-  const toggleFullscreen = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      video.requestFullscreen();
-    }
-  };
-
-  const formatTime = (time: number) => {
-    const mins = Math.floor(time / 60);
-    const secs = Math.floor(time % 60);
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  const handlePlay = () => {
+    setShowPoster(false);
   };
 
   return (
-    <div
-      className="video-wrapper relative w-full"
-      onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
-    >
- <video
-        ref={videoRef}
-        className="w-full rounded-xl object-cover"
-        style={{ maxHeight: '500px' }}
-        src="https://www.youtube.com/watch?v=ORL6KLesn2c&t=129s"
-        playsInline
-        preload="metadata"
-        poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
-      />
-
-      {/* Center play button overlay */}
-      {!isPlaying && (
-        <button
-          onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-xl transition-opacity duration-300 cursor-pointer"
-          aria-label="Play video"
-        >
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#06B6D4]/90 flex items-center justify-center shadow-lg shadow-[#06B6D4]/30">
-            <Play className="w-8 h-8 md:w-10 md:h-10 text-[#0F172A] fill-[#0F172A]" />
+    <div className="video-wrapper relative w-full rounded-xl overflow-hidden">
+      {/* Poster overlay — shown before user clicks play */}
+      {showPoster && (
+        <div className="relative w-full aspect-video bg-[#1E293B] rounded-xl overflow-hidden">
+          {/* Poster image background */}
+          <img
+            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
+            alt="Aura Audio headphones video preview"
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-[#0F172A]/50" />
+          {/* Center play button */}
+          <button
+            onClick={handlePlay}
+            className="absolute inset-0 flex items-center justify-center cursor-pointer group"
+            aria-label="Play video"
+          >
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#06B6D4]/90 flex items-center justify-center shadow-lg shadow-[#06B6D4]/30 group-hover:scale-110 group-hover:shadow-[#06B6D4]/50 transition-all duration-300">
+              <Play className="w-8 h-8 md:w-10 md:h-10 text-[#0F172A] fill-[#0F172A]" />
+            </div>
+          </button>
+          {/* Video label */}
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+            <span className="text-[#F8FAFC] text-sm md:text-base font-medium bg-[#0F172A]/60 px-3 py-1 rounded-lg">
+              Aura Audio — Experience Video
+            </span>
+            <span className="text-[#94A3B8] text-xs bg-[#0F172A]/60 px-2 py-1 rounded-lg">
+              Click to play
+            </span>
           </div>
-        </button>
+        </div>
       )}
 
-      {/* Custom controls bar */}
-      <AnimatePresence>
-        {showControls && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0F172A]/95 to-transparent p-4 pt-10 rounded-b-xl"
-          >
-            {/* Seek bar */}
-            <div className="mb-3">
-              <input
-                type="range"
-                min={0}
-                max={duration || 0}
-                value={currentTime}
-                onChange={handleSeek}
-                className="w-full h-1 bg-[#334155] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#06B6D4] [&::-webkit-slider-thumb]:shadow-[0_0_6px_rgba(6,182,212,0.5)]"
-                aria-label="Seek video"
-              />
-              <div className="flex justify-between text-xs text-[#94A3B8] mt-1">
-                <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
-              </div>
-            </div>
-
-            {/* Control buttons */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={togglePlay}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#06B6D4]/20 hover:bg-[#06B6D4]/40 transition-colors cursor-pointer"
-                aria-label={isPlaying ? 'Pause video' : 'Play video'}
-              >
-                {isPlaying ? (
-                  <Pause className="w-5 h-5 text-[#06B6D4]" />
-                ) : (
-                  <Play className="w-5 h-5 text-[#06B6D4] fill-[#06B6D4]" />
-                )}
-              </button>
-
-              <button
-                onClick={toggleMute}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#334155]/50 hover:bg-[#334155]/80 transition-colors cursor-pointer"
-                aria-label={isMuted ? 'Unmute' : 'Mute'}
-              >
-                {isMuted ? (
-                  <VolumeX className="w-5 h-5 text-[#94A3B8]" />
-                ) : (
-                  <Volume2 className="w-5 h-5 text-[#94A3B8]" />
-                )}
-              </button>
-
-              <input
-                type="range"
-                min={0}
-                max={1}
-                step={0.05}
-                value={isMuted ? 0 : volume}
-                onChange={handleVolumeChange}
-                className="w-20 h-1 bg-[#334155] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#06B6D4]"
-                aria-label="Volume"
-              />
-
-              <button
-                onClick={toggleFullscreen}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#334155]/50 hover:bg-[#334155]/80 transition-colors ml-auto cursor-pointer"
-                aria-label="Fullscreen"
-              >
-                <Maximize className="w-5 h-5 text-[#94A3B8]" />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* YouTube iframe — loaded only after user clicks play (saves bandwidth) */}
+      {!showPoster && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative w-full aspect-video rounded-xl overflow-hidden"
+        >
+          <iframe
+            src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&color=cyan`}
+            title="Aura Audio — Experience Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full rounded-xl"
+            style={{ border: 'none' }}
+          />
+        </motion.div>
+      )}
     </div>
   );
 }
