@@ -166,15 +166,15 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
- <div className="w-full max-w-4xl mx-auto aspect-video rounded-xl overflow-hidden bg-black shadow-2xl">
-  <video
-    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    controls
-    playsInline
-    preload="auto"
-    className="w-full h-full object-contain"
-  />
-</div>
+ <video
+        ref={videoRef}
+        className="w-full rounded-xl object-cover"
+        style={{ maxHeight: '500px' }}
+        src=https://www.youtube.com/watch?v=ORL6KLesn2c&t=129s
+        playsInline
+        preload="metadata"
+        poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
+      />
 
       {/* Center play button overlay */}
       {!isPlaying && (
