@@ -175,7 +175,6 @@ function VideoPlayer() {
     style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px' }}
   >
     <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
   </video>
 </div>
 
