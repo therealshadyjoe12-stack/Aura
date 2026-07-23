@@ -166,16 +166,14 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-  <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
-  <video 
-    controls 
-    playsInline
-    preload="metadata"
-    poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
-    style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px' }}
-  >
-    <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-  </video>
+ <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '12px', width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+  <iframe 
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0, borderRadius: '12px' }}
+    src="https://www.youtube.com/embed/5-nSZEtu_eg" 
+    title="Headphone Product Video" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowFullScreen
+  />
 </div>
 
       {/* Center play button overlay */}
