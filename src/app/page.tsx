@@ -170,7 +170,7 @@ function VideoPlayer() {
         ref={videoRef}
         className="w-full rounded-xl object-cover"
         style={{ maxHeight: '500px' }}
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         playsInline
         preload="metadata"
         poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
