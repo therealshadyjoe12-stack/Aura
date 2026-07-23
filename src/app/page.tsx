@@ -170,7 +170,7 @@ function VideoPlayer() {
         ref={videoRef}
         className="w-full rounded-xl object-cover"
         style={{ maxHeight: '500px' }}
-        src=https://www.youtube.com/watch?v=ORL6KLesn2c&t=129s
+        src="https://www.youtube.com/watch?v=ORL6KLesn2c&t=129s"
         playsInline
         preload="metadata"
         poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
