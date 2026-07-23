@@ -166,15 +166,18 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-    <video 
-  controls 
-  playsInline
-  style={{ width: '100%', borderRadius: '12px', maxHeight: '450px', backgroundColor: '#000' }}
->
-  <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c0/Big_Buck_Bunny_4K_30fps_2160p_h264.webm/Big_Buck_Bunny_4K_30fps_2160p_h264.1080p.vp9.webm" type="video/webm" />
-  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+  <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+  <video 
+    controls 
+    playsInline
+    preload="metadata"
+    poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
+    style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px' }}
+  >
+    <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
 
       {/* Center play button overlay */}
       {!isPlaying && (
