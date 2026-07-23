@@ -166,15 +166,15 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-      <video
-        ref={videoRef}
-        className="w-full rounded-xl object-cover"
-        style={{ maxHeight: '500px' }}
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-        playsInline
-        preload="metadata"
-        poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
-      />
+      <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '12px', width: '100%' }}>
+  <iframe 
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+    src="https://www.youtube-nocookie.com/embed/3JY8354xPmA?controls=1" 
+    title="Aura Audio Product Video" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  />
+</div>
 
       {/* Center play button overlay */}
       {!isPlaying && (
