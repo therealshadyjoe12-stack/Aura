@@ -166,15 +166,15 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-      <video 
-  controls 
-  playsInline 
-  style={{ width: '100%', borderRadius: '12px', maxHeight: '450px' }}
-  poster="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80"
->
-  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+     <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '12px', width: '100%' }}>
+  <iframe 
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+    src="https://www.youtube-nocookie.com/embed/fI902I_aAts?controls=1" 
+    title="Product Video" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen
+  />
+</div>
 
       {/* Center play button overlay */}
       {!isPlaying && (
