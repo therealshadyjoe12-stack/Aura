@@ -95,7 +95,7 @@ function VideoPlayer() {
     video.addEventListener('loadedmetadata', onLoadedMetadata);
     video.addEventListener('play', onPlay);
     video.addEventListener('pause', onPause);
-
+    
     return () => {
       video.removeEventListener('timeupdate', onTimeUpdate);
       video.removeEventListener('loadedmetadata', onLoadedMetadata);
@@ -166,18 +166,14 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
-<div style={{ width: '100%', maxWidth: '800px', margin: '2rem auto' }}>
-  <iframe 
-    width="100%" 
-    height="450" 
-    src="https://www.youtube.com/embed/5-nSZEtu_eg" 
-    title="Sony WH-1000XM5 Review" 
-    frameBorder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowFullScreen
-    style={{ borderRadius: '12px', display: 'block' }}
-  ></iframe>
-</div>
+<video 
+  src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
+  controls 
+  playsInline
+  preload="metadata"
+  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl border border-slate-800"
+>
+</video>
 
       {/* Center play button overlay */}
       {!isPlaying && (
