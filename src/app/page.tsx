@@ -166,15 +166,15 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
+ <div className="w-full max-w-4xl mx-auto aspect-video rounded-xl overflow-hidden bg-black shadow-2xl">
   <video
-  ref={videoRef}
-  className="w-full rounded-xl object-cover"
-  style={{ maxHeight: '500px' }}
-  src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-  controls
-  playsInline
-  preload="metadata"
-/>
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    controls
+    playsInline
+    preload="auto"
+    className="w-full h-full object-contain"
+  />
+</div>
 
       {/* Center play button overlay */}
       {!isPlaying && (
