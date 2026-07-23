@@ -166,14 +166,17 @@ function VideoPlayer() {
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
- <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '12px', width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+<div style={{ width: '100%', maxWidth: '800px', margin: '2rem auto' }}>
   <iframe 
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0, borderRadius: '12px' }}
+    width="100%" 
+    height="450" 
     src="https://www.youtube.com/embed/5-nSZEtu_eg" 
-    title="Headphone Product Video" 
+    title="Sony WH-1000XM5 Review" 
+    frameBorder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     allowFullScreen
-  />
+    style={{ borderRadius: '12px', display: 'block' }}
+  ></iframe>
 </div>
 
       {/* Center play button overlay */}
